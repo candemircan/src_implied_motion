@@ -1,0 +1,33 @@
+#PBS -S /bin/bash
+#PBS -q shared
+#PBS -l nodes=1:ppn=8
+#PBS -l mem=8gb
+#PBS -N fmriprep_can
+#PBS -o fmriprep_can.out
+#PBS -e fmriprep_can.err
+#PBS -l walltime=02:00:00:00
+#PBS -m abe
+#PBS -M can.demircan@tutanota.com
+
+
+
+while [[ "$#" -gt 0 ]]
+do case $1 in
+    -p|--participant) participant="$2"
+esac
+shift
+done
+
+
+project_root=$HOME/implied_motion
+license=$project_root/data/derivatives/fMRIprep/sourcedata/freesurfer/license.txt
+input=$project_root/data/bids
+output=$project_root/data/derivatives/fMRIprep/
+
+
+docker run --user "$(id -u):$(id -g)" \
+-v "$license":/opt/freesurfer/license.txt \
+-v "$input":/data:ro \
+-v "$output":/out nipreps/fmriprep:latest /data \
+/out participant --output-spaces anat func --nthreads 8 --dummy-scans 8 --participant_label "$participant"
+
