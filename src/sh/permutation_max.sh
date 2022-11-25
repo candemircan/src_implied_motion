@@ -10,7 +10,7 @@ do
     do
         for condition in real implied cross
         do
-            python "$PROJECT_ROOT"/src/Py/permutation_max_script.py \
+            python "$PROJECT_ROOT"/src/Py/permutation_max.py \
                 --workingdir "$PROJECT_ROOT" \
                 --targetdecode $target \
                 --design $design \

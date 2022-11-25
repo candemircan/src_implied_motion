@@ -24,7 +24,7 @@ do
                     -l mem=4gb \
                     -l walltime=00:00:30:00 \
                     -F "--workingdir '$PROJECT_ROOT' --sub '$participant' --roi '$roi' --targetdecode '$target' --design '$design' --permutations 1000" \
-                    "$PROJECT_ROOT"/src/Py/mvpa_cross_script.py              
+                    "$PROJECT_ROOT"/src/Py/mvpa_cross.py              
             done
         done
     done
